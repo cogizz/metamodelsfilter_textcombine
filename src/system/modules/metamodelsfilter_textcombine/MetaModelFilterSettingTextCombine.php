@@ -47,6 +47,7 @@ class MetaModelFilterSettingTextCombine extends MetaModelFilterSetting
 	 */
 	public function prepareRules(IMetaModelFilter $objFilter, $arrFilterUrl)
 	{
+
 		$objMetaModel = $this->getMetaModel();
 		$strParamName = $this->getParamName();
 		$strParamValue = $arrFilterUrl[$strParamName];
@@ -76,29 +77,28 @@ class MetaModelFilterSettingTextCombine extends MetaModelFilterSetting
 				break;
 		}
 
-		$arrQuery = array();
-
 		if ($strParamName && $strParamValue)
 		{
+			if ($this->get('textcombine_operator') == 'and') {
+				$objParentRule = new MetaModelFilterRuleAND();
+			}
+
+			if($this->get('textcombine_operator') == 'or') {
+				$objParentRule = new MetaModelFilterRuleOR();
+			}
+
 			foreach($arrAttributes as $intAttribute) {
 				$objAttribute = $objMetaModel->getAttributeById($intAttribute);
 
 				if($objAttribute) {
-					$arrQuery[] = sprintf('%s LIKE ?', $objAttribute->getColName());
-					$arrParams[] = str_replace(array('*', '?'), array('%', '_'), $strWhat);
+					$objSubFilter = new MetaModelFilter($objMetaModel);
+					$objSubFilter->addFilterRule(new MetaModelFilterRuleSearchAttribute($objAttribute, $strWhat));
+					$objParentRule->addChild($objSubFilter);
 				}
 			}
 
-			if(count($arrQuery) && count($arrParams)) {
-				$strQuery = sprintf(
-					'SELECT id FROM %s WHERE %s',
-					$this->getMetaModel()->getTableName(),
-					'(' . implode(' OR ', $arrQuery) . ')'
-				);
-
-				$objFilter->addFilterRule(new MetaModelFilterRuleSimpleQuery($strQuery, $arrParams));
-				return;
-			}
+			$objFilter->addFilterRule($objParentRule);
+			return;
 		}
 
 		$objFilter->addFilterRule(new MetaModelFilterRuleStaticIdList(NULL));
