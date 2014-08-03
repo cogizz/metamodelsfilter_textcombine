@@ -33,10 +33,9 @@
 class TableMetaModelFilterSetting_TextCombine extends TableMetaModelHelper
 {
 
-	protected $objMetaModel = null;
+    protected $objMetaModel = null;
 
-	
-	/**
+    /**
 	 * translates an id to a generated alias {@see TableMetaModelFilterSetting::getAttributeNames()}
 	 *
 	 * @param string        $strValue the id to translate.
@@ -45,72 +44,66 @@ class TableMetaModelFilterSetting_TextCombine extends TableMetaModelHelper
 	 *
 	 * @return string
 	 */
-	public function attrIdToName($strValue, $objDC)
-	{
-		$objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
+    public function attrIdToName($strValue, $objDC)
+    {
+        $objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
 
-		if (!$objMetaModel)
-		{
-			return 0;
-		}
-		$arrIds = deserialize($strValue);
-		$arrNames = array();
+        if (!$objMetaModel) {
+            return 0;
+        }
+        $arrIds = deserialize($strValue);
+        $arrNames = array();
 
-		if(count($arrIds) > 0) {
-			foreach($arrIds as $id) {
-				$objAttribute = $objMetaModel->getAttributeById($id);
-				if ($objAttribute)
-				{
-					$arrNames[] =  $objMetaModel->getTableName() .'_' . $objAttribute->getColName();
-				}
-			}
+        if (count($arrIds) > 0) {
+            foreach ($arrIds as $id) {
+                $objAttribute = $objMetaModel->getAttributeById($id);
+                if ($objAttribute) {
+                    $arrNames[] =  $objMetaModel->getTableName() .'_' . $objAttribute->getColName();
+                }
+            }
 
-			$strValue = serialize($arrNames);
-		}
+            $strValue = serialize($arrNames);
+        }
 
-		return $strValue;
-	}
+        return $strValue;
+    }
 
-
-	/**
+    /**
 	 * provide options for default selection
 	 *
 	 * @param object
 	 *
 	 * @return array
 	 */
-	public function arrNameToAttrId($strValue, $objDC)
-	{
-		$objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
+    public function arrNameToAttrId($strValue, $objDC)
+    {
+        $objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
 
-		if (!$objMetaModel)
-		{
-			return 0;
-		}
+        if (!$objMetaModel) {
+            return 0;
+        }
 
-		$arrNames = deserialize($strValue);
-		$arrIds = array();
+        $arrNames = deserialize($strValue);
+        $arrIds = array();
 
-		if(count($arrNames) > 0) {
-			foreach($arrNames as $name) {
-				$strName = str_replace($objMetaModel->getTableName() . '_', '', $name);
+        if (count($arrNames) > 0) {
+            foreach ($arrNames as $name) {
+                $strName = str_replace($objMetaModel->getTableName() . '_', '', $name);
 
-				$objAttribute = $objMetaModel->getAttribute($strName);
+                $objAttribute = $objMetaModel->getAttribute($strName);
 
-				if ($objAttribute)
-				{
-					$arrIds[] = $objAttribute->get('id');
-				}
-			}
+                if ($objAttribute) {
+                    $arrIds[] = $objAttribute->get('id');
+                }
+            }
 
-			$strValue = serialize($arrIds);
-		}
+            $strValue = serialize($arrIds);
+        }
 
-		return $strValue;
-	}
+        return $strValue;
+    }
 
-
-	/**
+    /**
 	 * backend list display of fe-filter
 	 * @param array
 	 * @param string
@@ -119,44 +112,42 @@ class TableMetaModelFilterSetting_TextCombine extends TableMetaModelHelper
 	 * @param string
 	 * @return string
 	 */
-	public function infoCallback($arrRow, $strLabel, $objDC, $imageAttribute, $strImage)
-	{
-		$objDatabase = Database::getInstance();
-		$this->objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
-		$objAttributes = $objDatabase->prepare("SELECT textcombine_attributes FROM tl_metamodel_filtersetting Where id = ?")->limit(1)->execute($arrRow['id']);
+    public function infoCallback($arrRow, $strLabel, $objDC, $imageAttribute, $strImage)
+    {
+        $objDatabase = Database::getInstance();
+        $this->objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
+        $objAttributes = $objDatabase->prepare("SELECT textcombine_attributes FROM tl_metamodel_filtersetting Where id = ?")->limit(1)->execute($arrRow['id']);
 
-		$arrAttributes = deserialize($objAttributes->textcombine_attributes);
-		$strAttrName = '';
+        $arrAttributes = deserialize($objAttributes->textcombine_attributes);
+        $strAttrName = '';
 
-		if ($objAttributes->numRows > 0)
-		{
-			foreach($arrAttributes as $attribute) {
-				$objAttribute = $this->objMetaModel->getAttributeById($attribute);
+        if ($objAttributes->numRows > 0) {
+            foreach ($arrAttributes as $attribute) {
+                $objAttribute = $this->objMetaModel->getAttributeById($attribute);
 
-				if($objAttribute) {
-					$arrAttributeNames[] = $objAttribute->getName();
-				} else {
-					$arrAttributeNames[] = $attribute;
-				}
-			}
+                if ($objAttribute) {
+                    $arrAttributeNames[] = $objAttribute->getName();
+                } else {
+                    $arrAttributeNames[] = $attribute;
+                }
+            }
 
-			$strAttrName = implode(', ', $arrAttributeNames);
-		}
+            $strAttrName = implode(', ', $arrAttributeNames);
+        }
 
-		if (!empty($arrRow['comment']))
-		{
-			$arrRow['comment'] = sprintf($GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['_comment_'], $arrRow['comment']);
-		}
+        if (!empty($arrRow['comment'])) {
+            $arrRow['comment'] = sprintf($GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['_comment_'], $arrRow['comment']);
+        }
 
-		$strReturn = sprintf(
-			$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['fefilter'],
-			'<a href="' . $this->addToUrl('act=edit&amp;id='.$arrRow['id']). '">' . $strImage . '</a>',
-			$strLabel,
-			$arrRow['comment'],
-			$strAttrName,
-			$arrRow['urlparam'] ? $arrRow['urlparam'] : 'textsearch_' . $arrRow['id']
-		);
+        $strReturn = sprintf(
+            $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['fefilter'],
+            '<a href="' . $this->addToUrl('act=edit&amp;id='.$arrRow['id']). '">' . $strImage . '</a>',
+            $strLabel,
+            $arrRow['comment'],
+            $strAttrName,
+            $arrRow['urlparam'] ? $arrRow['urlparam'] : 'textsearch_' . $arrRow['id']
+        );
 
-		return $strReturn;
-	}
+        return $strReturn;
+    }
 }

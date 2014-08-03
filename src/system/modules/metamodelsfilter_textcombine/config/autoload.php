@@ -20,5 +20,5 @@
  */
 ClassLoader::addClasses(array
 (
-	'MetaModelFilterSettingTextCombine'         => 'system/modules/metamodelsfilter_text/MetaModelFilterSettingTextCombine.php',
+    'MetaModelFilterSettingTextCombine'         => 'system/modules/metamodelsfilter_text/MetaModelFilterSettingTextCombine.php',
 ));

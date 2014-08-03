@@ -20,14 +20,12 @@
  */
 $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typenames']['textcombine']     = 'Kombinierter-Textfilter';
 
-
 /**
  * fields
  */
 $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textsearch']   = array('Suchart', 'Teiltext-Findung bei Textsuche.');
 $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_attributes'] = array('Suchfelder', 'Durchsuchbare Attribute.');
 $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_operator'] = array('Verknüpfung der Suchfelder', 'Art der Verknüpfung für die Suchfelder.');
-
 
 /**
  * references

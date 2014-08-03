@@ -20,12 +20,10 @@
  */
 $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typenames']['textcombine']     = 'Combine-Text filter';
 
-
 /**
  * fields
  */
 $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textsearch']   = array('Search type', 'Finding text parts.');
-
 
 /**
  * references

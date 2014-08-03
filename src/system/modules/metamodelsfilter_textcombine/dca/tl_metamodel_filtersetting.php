@@ -20,7 +20,7 @@
  */
 $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['metapalettes']['textcombine extends default'] = array
 (
-	'+config' => array('textcombine_attributes', 'textcombine_operator', 'urlparam', 'label', 'template', 'textsearch'),
+    '+config' => array('textcombine_attributes', 'textcombine_operator', 'urlparam', 'label', 'template', 'textsearch'),
 );
 
 /**
@@ -28,40 +28,39 @@ $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['metapalettes']['textcombine ex
  */
 $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['fields']['textcombine_attributes'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_attributes'],
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('TableMetaModelFilterSetting', 'getAttributeNames'),
-	'eval'                    => array(
-		'doNotSaveEmpty'      => true,
-		'alwaysSave'          => true,
-		'submitOnChange'      => false,
-		'includeBlankOption'  => true,
-		'mandatory'           => true,
-		'tl_class'            => 'long',
-		'chosen'              => false,
-		'multiple'			  => true
-	),
-	'load_callback'           => array(array('TableMetaModelFilterSetting_TextCombine', 'attrIdToName')),
-	'save_callback'           => array(array('TableMetaModelFilterSetting_TextCombine', 'arrNameToAttrId')),
+    'label'                   => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_attributes'],
+    'exclude'                 => true,
+    'inputType'               => 'select',
+    'options_callback'        => array('TableMetaModelFilterSetting', 'getAttributeNames'),
+    'eval'                    => array(
+        'doNotSaveEmpty'      => true,
+        'alwaysSave'          => true,
+        'submitOnChange'      => false,
+        'includeBlankOption'  => true,
+        'mandatory'           => true,
+        'tl_class'            => 'long',
+        'chosen'              => false,
+        'multiple'              => true
+    ),
+    'load_callback'           => array(array('TableMetaModelFilterSetting_TextCombine', 'attrIdToName')),
+    'save_callback'           => array(array('TableMetaModelFilterSetting_TextCombine', 'arrNameToAttrId')),
 );
-
 
 $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['fields']['textcombine_operator'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_operator'],
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'				  => array('or','and'),
-	'reference'				  => $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['references'],
-	'eval'                    => array(
-		'doNotSaveEmpty'      => true,
-		'alwaysSave'          => true,
-		'submitOnChange'      => false,
-		'includeBlankOption'  => false,
-		'mandatory'           => false,
-		'tl_class'            => 'w50 clr',
-		'chosen'              => false,
-		'multiple'						=> false
-	),
+    'label'                   => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_operator'],
+    'exclude'                 => true,
+    'inputType'               => 'select',
+    'options'                  => array('or','and'),
+    'reference'                  => $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['references'],
+    'eval'                    => array(
+        'doNotSaveEmpty'      => true,
+        'alwaysSave'          => true,
+        'submitOnChange'      => false,
+        'includeBlankOption'  => false,
+        'mandatory'           => false,
+        'tl_class'            => 'w50 clr',
+        'chosen'              => false,
+        'multiple'                        => false
+    ),
 );
