@@ -16,7 +16,7 @@
  * @filesource
  */
 
-namespace MetaModels\Filter\Setting;
+namespace MetaModels\FilterTextcombineBundle\FilterSetting;
 
 use MetaModels\Filter\Filter;
 use MetaModels\Filter\IFilter;
@@ -24,8 +24,8 @@ use MetaModels\Filter\Rules\Condition\ConditionAnd;
 use MetaModels\Filter\Rules\Condition\ConditionOr;
 use MetaModels\Filter\Rules\SearchAttribute;
 use MetaModels\Filter\Rules\StaticIdList;
-use MetaModels\FrontendIntegration\FrontendFilterOptions;
 use MetaModels\Filter\Setting\Simple;
+use MetaModels\FrontendIntegration\FrontendFilterOptions;
 
 /**
  * Filter "text combine" for FE-filtering, based on filters by the MetaModels team.
@@ -33,7 +33,7 @@ use MetaModels\Filter\Setting\Simple;
  * @package    MetaModels
  * @subpackage FilterTextCombine
  */
-class TextCombine extends Simple
+class Textcombine extends Simple
 {
 
     /**

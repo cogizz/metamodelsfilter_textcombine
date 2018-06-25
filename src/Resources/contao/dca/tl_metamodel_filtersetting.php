@@ -40,6 +40,7 @@ $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['fields']['textcombine_attribut
     'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_attributes'],
     'exclude'   => true,
     'inputType' => 'select',
+    'sql'       => 'blob NOT NULL',
     'eval'      => array(
         'doNotSaveEmpty'     => true,
         'alwaysSave'         => true,
@@ -57,6 +58,7 @@ $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['fields']['textcombine_operator
     'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textcombine_operator'],
     'exclude'   => true,
     'inputType' => 'select',
+    'sql'       => 'varchar(3) NOT NULL default \'\'',
     'options'   => array('or', 'and'),
     'reference' => $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['references'],
     'eval'      => array(
@@ -76,6 +78,7 @@ $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['fields']['textsearch'] = array
     'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['textsearch'],
     'exclude'   => true,
     'inputType' => 'select',
+    'sql'       => 'varchar(32) NOT NULL default \'\'',
     'options'   => array('exact', 'beginswith', 'endswith'),
     'reference' => $GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['references'],
     'eval'      => array(
@@ -89,5 +92,6 @@ $GLOBALS['TL_DCA']['tl_metamodel_filtersetting']['fields']['placeholder'] = arra
     'label'     => &$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['placeholder'],
     'exclude'   => true,
     'inputType' => 'text',
+    'sql'       => 'varchar(255) NOT NULL default \'\'',
     'eval'      => array('tl_class' => 'w50')
 );
