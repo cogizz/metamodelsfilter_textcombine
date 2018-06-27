@@ -16,12 +16,14 @@
  * @filesource
  */
 
-namespace MetaModels\Filter\Setting;
+namespace MetaModels\FilterTextcombineBundle\FilterSetting;
+
+use MetaModels\Filter\Setting\AbstractFilterSettingTypeFactory;
 
 /**
  * Attribute type factory for textcombine filter settings.
  */
-class TextCombineFilterSettingTypeFactory extends AbstractFilterSettingTypeFactory
+class TextcombineFilterSettingTypeFactory extends AbstractFilterSettingTypeFactory
 {
     /**
      * {@inheritDoc}
@@ -32,17 +34,14 @@ class TextCombineFilterSettingTypeFactory extends AbstractFilterSettingTypeFacto
 
         $this
             ->setTypeName('textcombine')
-            ->setTypeIcon('system/modules/metamodelsfilter_textcombine/html/filter_text.png')
-            ->setTypeClass('MetaModels\Filter\Setting\TextCombine')
-            ->allowAttributeTypes();
-
-        foreach (array(
+            ->setTypeIcon('bundles/metamodelsfiltertextcombine/filter_text.png')
+            ->setTypeClass(TextCombine::class)
+            ->allowAttributeTypes(
                 'longtext',
                 'text',
                 'translatedtext',
-                'translatedlongtext',
-            ) as $attribute) {
-            $this->addKnownAttributeType($attribute);
-        }
+                'translatedlongtext'
+            );
     }
 }
+

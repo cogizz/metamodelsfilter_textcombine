@@ -1,0 +1,19 @@
+services:
+    metamodels.filter_textcombine.factory:
+        class: MetaModels\FilterTextcombineBundle\FilterSetting\TextcombineFilterSettingTypeFactory
+        tags:
+          - { name: metamodels.filter_factory }
+
+    metamodels.filter_textcombine.listener.filter_setting_renderer:
+        class: MetaModels\FilterTextcombineBundle\EventListener\TextcombineFilterSettingTypeRendererListener
+        arguments:
+          - "@metamodels.filter_setting_factory"
+          - "@event_dispatcher"
+          - "@metamodels.assets.icon_builder"
+          - "@cca.dc-general.scope-matcher"
+        tags:
+          - {
+              name: kernel.event_listener,
+              event: 'dc-general.view.contao2backend.model-to-label',
+              method: modelToLabel
+            }

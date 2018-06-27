@@ -23,8 +23,7 @@
   },
   "require": {
     "php": ">=5.6",
-    "contao/core": ">=3.5,<3.6",
-    "contao-community-alliance/composer-plugin": "~2.0",
+    "contao/core-bundle": "^4.4",
     "metamodels/core": "~2.0"
   },
   "require-dev": {
@@ -35,16 +34,15 @@
     "contao/core": "3.4.0"
   },
   "autoload": {
-    "psr-0": {
-      "MetaModels": "src"
-    }
+    "psr-4": {
+      "MetaModels\\FilterTextcombineBundle\\": "src"
+    },
+    "files": [
+      "src/deprecated-autoload.php"
+    ]
   },
   "extra": {
-    "contao": {
-      "symlinks": {
-        "contao": "system/modules/metamodelsfilter_textcombine"
-      }
-    },
+    "contao-manager-plugin": "MetaModels\\FilterTextcombineBundle\\ContaoManager\\Plugin",
     "branch-alias": {
       "dev-master": "2.0.x-dev",
       "dev-develop": "2.1.x-dev"
