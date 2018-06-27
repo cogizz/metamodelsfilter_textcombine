@@ -1,5 +1,5 @@
 {
-  "name": "systemhaus/metamodelsfilter_textcombine",
+  "name": "cboelter/metamodelsfilter_textcombine",
   "description": "MetaModels textcombine filter",
   "keywords": [
     "contao",
@@ -17,6 +17,10 @@
       "role": "Developer"
     }
   ],
+  "support": {
+    "issues": "https://github.com/cboelter/metamodelsfilter_textcombine/issues",
+    "source": "https://github.com/cboelter/metamodelsfilter_textcombine"
+  },
   "require": {
     "php": ">=5.6",
     "contao/core-bundle": "^4.4",
